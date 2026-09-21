@@ -1,14 +1,13 @@
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 
+import functions as f
+
 app = FastAPI()
-templates = Jinja2Templates(directory="dist")
+templates = Jinja2Templates(directory="templates")
 
 # Pagina Inicial
-@app.get('/')
+@app.get('/', include_in_schema= False)
 def Homepage(request : Request):
-    return templates.TemplateResponse(request = request, name="index.html")
+    return templates.TemplateResponse(request,"index.html", {"title":"Home"})
 
-@app.get('/tirarduvida/')
-def askprincipal():
-    return {"message": "Hello World"}

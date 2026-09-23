@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel da Coordenação - Cronograma</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="estilo.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <div class="brand"><i class="bi bi-layers-fill text-success fs-4"></i> Portal Coordenador</div>
+            <nav class="nav flex-column mb-auto">
+                <a href="painel_coord.html" class="nav-link-sidebar"><i class="bi bi-megaphone"></i> Gerenciar Avisos</a>
+                <a href="duvidas_coord.html" class="nav-link-sidebar"><i class="bi bi-chat-left-dots"></i> Dúvidas</a>
+                <a href="cronograma_coord.html" class="nav-link-sidebar active"><i class="bi bi-calendar-event"></i> Cronograma</a>
+            </nav>
+            <a href="index.html" class="nav-link-sidebar mt-auto text-danger"><i class="bi bi-box-arrow-left"></i> Sair</a>
+        </div>
+
+        <!-- CONTEÚDO -->
+        <div class="main-content">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="mb-0">Gerenciar Cronograma</h2>
+                    <p class="text-muted">Adicione eventos e prazos de entrega.</p>
+                </div>
+                <!-- Botão que abre o Modal de Novo Evento -->
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNovoEvento">
+                    <i class="bi bi-plus-lg me-2"></i>Novo Evento
+                </button>
+            </div>
+
+            <div class="card p-0 overflow-hidden">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4">Nome do Evento</th>
+                            <th>Data</th>
+                            <th>Tipo</th>
+                            <th class="text-end pe-4">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="ps-4 fw-semibold">Entrega do Relatório Parcial</td>
+                            <td>18 Set 2026</td>
+                            <td><span class="badge bg-danger rounded-pill">Entrega</span></td>
+                            <td class="text-end pe-4">
+                                <button class="btn btn-sm btn-outline-secondary me-1"><i class="bi bi-pencil"></i></button>
+                                <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4 fw-semibold">Reunião de Alinhamento</td>
+                            <td>25 Set 2026</td>
+                            <td><span class="badge bg-primary rounded-pill">Reunião</span></td>
+                            <td class="text-end pe-4">
+                                <button class="btn btn-sm btn-outline-secondary me-1"><i class="bi bi-pencil"></i></button>
+                                <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: NOVO EVENTO -->
+    <div class="modal fade" id="modalNovoEvento" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius: 16px; border: none;">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title fw-bold">Adicionar ao Cronograma</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Nome do Evento/Prazo</label>
+                            <input type="text" class="form-control" placeholder="Ex: Prazo Final...">
+                        </div>
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <label class="form-label fw-semibold">Data</label>
+                                <input type="date" class="form-control">
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label class="form-label fw-semibold">Tipo</label>
+                                <select class="form-select" style="border-radius: 8px;">
+                                    <option>Entrega</option>
+                                    <option>Reunião</option>
+                                    <option>Apresentação</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Descrição (Opcional)</label>
+                            <textarea class="form-control" rows="2"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer border-top-0">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success">Salvar Evento</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronograma - Portal do Aluno</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="estilo.css" rel="stylesheet">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-aluno sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-primary" href="painel_aluno.html">
+                <i class="bi bi-person-badge fs-3"></i> Portal Aluno
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-4 gap-2">
+                    <li class="nav-item"><a class="nav-link" href="painel_aluno.html"><i class="bi bi-newspaper me-1"></i> Mural</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="cronograma_aluno.html"><i class="bi bi-calendar3 me-1"></i> Cronograma</a></li>
+                    <li class="nav-item"><a class="nav-link" href="duvidas_aluno.html"><i class="bi bi-question-circle me-1"></i> FAQ / Dúvidas</a></li>
+                </ul>
+                <a href="index.html" class="btn btn-outline-danger btn-sm px-3"><i class="bi bi-box-arrow-right me-1"></i> Sair</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTEÚDO DO CRONOGRAMA -->
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <h3 class="fw-bold mb-4">Cronograma de Atividades</h3>
+                
+                <div class="card p-0 overflow-hidden mb-4">
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item p-4">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                                <h5 class="mb-1 fw-bold">Entrega do Relatório Parcial</h5>
+                                <small class="text-danger fw-bold"><i class="bi bi-calendar-event"></i> 18 Set 2026</small>
+                            </div>
+                            <p class="mb-1 text-muted">Envio do documento em PDF contendo os resultados da primeira fase.</p>
+                        </div>
+                        <div class="list-group-item p-4">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                                <h5 class="mb-1 fw-bold">Reunião de Alinhamento</h5>
+                                <small class="text-primary fw-bold"><i class="bi bi-calendar-event"></i> 25 Set 2026</small>
+                            </div>
+                            <p class="mb-1 text-muted">Reunião presencial no auditório principal para discutir os próximos passos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

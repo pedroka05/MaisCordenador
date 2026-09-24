@@ -4,4 +4,6 @@ version = "0.1.0"
 requires-python = ">=3.14"
 dependencies = [
     "fastapi[standard]>=0.141.1",
+    "mysqlclient>=2.3.0",
+    "sqlmodel>=0.0.47",
 ]

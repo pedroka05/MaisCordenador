@@ -1,21 +1,23 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request,responses
 from fastapi.templating import Jinja2Templates
-
-import functions as f
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates") ## Vai abrir o diretório 'Templates'
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Pagina Inicial
 @app.get('/', include_in_schema= False)
 def Homepage(request : Request):
     return templates.TemplateResponse(request,"index.html", {"title":"Home"}) ### Retorna o valor da variável "title"
 
-@app.get('/login_aluno/', include_in_schema= False)
+@app.get('/login_aluno/', name= "student_login",include_in_schema= False)
 async def student_login(request: Request):
     return templates.TemplateResponse(request,"login_aluno.html")
 
-
+@app.post('/login_aluno', name='form_login_aluno')
+async def student_login_form(response : responses.Response):
+    ...
 
 @app.get('/login_coord/')
 async def coord_login(request: Request):

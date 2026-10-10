@@ -4,14 +4,13 @@ from datetime import datetime
 from fastapi import Depends, HTTPException, Query
 from sqlmodel import Field, Session, SQLModel, create_engine, select
 
-from main import app
 
 # Models
 ### Student Model
 class Aluno(SQLModel, table=True):
     id : int = Field(primary_key=True)
     Name : str = Field(index= True)
-    id_Turma : int = Field(foreign_key= True)
+    id_Turma : int = Field(foreign_key= "turma.id")
     age : int | None = None
     email : str 
     password : str
@@ -46,3 +45,9 @@ engine = create_engine(sql_url, connect_args= connect_args)
 
 def create_db_and_tables():
     return SQLModel.metadata.create_all(engine)
+
+def get_session():
+    with Session(engine):
+        yield session
+
+Sessiondep = Annotated[Session, Depends(get_session)]

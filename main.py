@@ -2,6 +2,8 @@ from fastapi import FastAPI, Request,responses
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
+import database as db
+
 app = FastAPI()
 templates = Jinja2Templates(directory="templates") ## Vai abrir o diretório 'Templates'
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -9,7 +11,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.on_event("startup")
 async def on_startup():
-    ... 
+    db.create_db_and_tables()
 
 
 # Pagina Inicial

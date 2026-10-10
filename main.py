@@ -6,6 +6,12 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates") ## Vai abrir o diretório 'Templates'
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
+
+@app.on_event("startup")
+async def on_startup():
+    ... 
+
+
 # Pagina Inicial
 @app.get('/', include_in_schema= False)
 def Homepage(request : Request):

@@ -11,11 +11,23 @@ from main import app
 class Aluno(SQLModel, table=True):
     id : int = Field(primary_key=True)
     Name : str = Field(index= True)
+    id_Turma : int = Field(foreign_key= True)
     age : int | None = None
     email : str 
     password : str
 
-###
+class Turma(SQLModel, table = True):
+    id : int = Field(primary_key=True)
+    nome : str
+
+
+### 
+class Coodenador(SQLModel, table=True, ):
+    id : int = Field(primary_key= True)
+    id_duvida :int = Field(foreign_key="duvida.id")
+    id_turma : int = Field(foreign_key="turma.id")
+    senha : str
+
 class Duvida(SQLModel, table=True):
     id : int = Field(primary_key= True)
     student_id : int = Field(foreign_key="aluno.id")
@@ -24,17 +36,13 @@ class Duvida(SQLModel, table=True):
     text : str 
     resposta : str | None = None
 
-### 
-class Coodenador(SQLModel, table=True, ):
-    id : int = Field(primary_key= True)
-    id_duvida :int = Field(foreign_key="duvida.id")
-    senha : str
-
-
 #
 
-mysql_bd_file = "database.mysql"
-mysql_url = f"mysql:///{mysql_bd_file}"
+sql_bd_file = "database.bd"
+sql_url = f"sqlite:///{sql_bd_file}"
 
 connect_args = {"check_same_thread": False}
-engine = create_engine(mysql_url, connect_args= connect_args)
+engine = create_engine(sql_url, connect_args= connect_args)
+
+def create_db_and_tables():
+    return SQLModel.metadata.create_all(engine)

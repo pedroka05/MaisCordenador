@@ -18,17 +18,17 @@
             <div class="card-body">
                 <a href="index.html" class="text-decoration-none text-muted mb-3 d-inline-block"><i class="bi bi-arrow-left"></i> Voltar</a>
                 <h4 class="text-center mb-4 text-primary">Portal do Estudante</h4>
-                <form>
+                <form method="post" action="/login_aluno">
                     <div class="mb-3">
-                        <label class="form-label">E-mail</label>
-                        <input type="email" class="form-control" placeholder="nome@aluno.edu.br">
+                        <label class="form-label" for="id">ID</label>
+                        <input type="number" name="id" form-control" id="id" placeholder="000000" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Senha</label>
-                        <input type="password" class="form-control" placeholder="••••••••">
+                        <label class="form-label" for="password">Senha</label>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="••••••••" required>
                     </div>
                     <div class="d-grid mt-4">
-                        <a href="painel_aluno.html" class="btn btn-primary btn-lg">Entrar</a>
+                        <button type="submit" class="btn btn-primary btn-lg">Entra</button>
                     </div>
                 </form>
             </div>

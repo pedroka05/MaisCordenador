@@ -1,10 +1,9 @@
-import database as db
-
 from fastapi import FastAPI, Request,responses,Form
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from typing import Annotated
 
+import database as db
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates") ## Vai abrir o diretório 'Templates'

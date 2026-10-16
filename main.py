@@ -1,8 +1,10 @@
-from fastapi import FastAPI, Request,responses
+import database as db
+
+from fastapi import FastAPI, Request,responses,Form
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+from typing import Annotated
 
-import database as db
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates") ## Vai abrir o diretório 'Templates'
@@ -24,15 +26,16 @@ async def student_login(request: Request):
     return templates.TemplateResponse(request,"login_aluno.html")
 
 @app.post('/login_aluno', name='form_login_aluno')
-async def student_login_form(response : responses.Response):
+async def student_login_form(request: Request, id: Annotated[int, Form(alias="id")], password: Annotated[str, Form(alias="password")]):
+    ### Fazer ele retornar o valor ta dando certo, so que tem que por algumas mudanças tipo senha ser feita em hashes
+    # O msm vale para "coord_login"
     ...
 
 @app.get('/login_coord/')
-async def coord_login(request: Request):
+async def coord_login(request: Request, id: Annotated[int, Form(alias="id")], password: Annotated[str, Form(alias="password")]):
     return templates.TemplateResponse(request,"login_coord.html")
 
 
 @app.get('/login_coord/{coord_id}/painel')
 async def coord(request: Request):
     return templates.TemplateResponse(request, "painel_coord.html")
-

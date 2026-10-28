@@ -61,7 +61,7 @@ class Resposta(SQLModel, table=True):
     coordenador: Coordenador = Relationship(back_populates="respostas")
 
 
-sql_bd_file = "database.bd"
+sql_bd_file = "database.db"
 sql_url = f"sqlite:///{sql_bd_file}"
 
 connect_args = {"check_same_thread": False}

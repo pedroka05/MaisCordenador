@@ -6,18 +6,22 @@ from sqlmodel import Field, Session, SQLModel, create_engine, select,Relationshi
 
 
 # Models
+
+class CoordenadorTurma(SQLModel, table=True):  # tabela intermediária (N:N)
+    coordenador_id: int = Field(foreign_key="coordenador.id", primary_key=True)
+    turma_id: int = Field(foreign_key="turma.id", primary_key=True)
+
 class Turma(SQLModel, table = True):
     id : int = Field(primary_key=True)
     nome : str
 
     alunos: list["Aluno"] = Relationship(back_populates="turma")
-    coordenadores: list["Coordenador"] = Relationship(back_populates="turmas", link_model="CoordendorTurma")
-
+    coordenadores: list["Coordenador"] = Relationship(back_populates="turmas", link_model=CoordenadorTurma)
 class Aluno(SQLModel, table=True):
     id : int = Field(primary_key=True)
     username : str = Field(index= True)
     id_Turma : int = Field(foreign_key= "turma.id")
-    age : int | None = None
+    birthday : int 
     email : str
     password : str
 
@@ -25,24 +29,22 @@ class Aluno(SQLModel, table=True):
     duvidas: list["Duvida"] = Relationship(back_populates="aluno") 
 
 
-class Coodenador(SQLModel, table=True, ):
-    id : int = Field(primary_key= True)
+class Coordenador(SQLModel, table=True, ):
+    id : int | None = Field(default=None, primary_key= True)
     username : str = Field(index= True)
-    id_duvida :int = Field(foreign_key="duvida.id")
-    id_turma : int = Field(foreign_key="turma.id")
     senha : str
 
-class CoordenadorTurma(SQLModel, table=True):  # tabela intermediária (N:N)
-    coordenador_id: int = Field(foreign_key="coordenador.id", primary_key=True)
-    turma_id: int = Field(foreign_key="turma.id", primary_key=True)
+    turmas:list[Turma] = Relationship(back_populates="coordenadores", link_model=CoordenadorTurma)
+    respostas: list["Resposta"] = Relationship(back_populates="coordenador")
+
 
 class Duvida(SQLModel, table=True):
-    id : int = Field(primary_key= True)
+    id: int | None = Field(default=None, primary_key=True)
     student_id : int = Field(foreign_key="aluno.id")
-    date : datetime.now(timezone.utc)
+    date: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))    
     title : str
     text : str
-    status : str| Field(default="aberta")
+    status : str = Field(default="aberta")
 
     aluno: Aluno = Relationship(back_populates="duvidas")
     respostas: list["Resposta"] = Relationship(back_populates="duvida")
@@ -52,7 +54,8 @@ class Resposta(SQLModel, table=True):
     duvida_id: int = Field(foreign_key="duvida.id")
     coordenador_id: int = Field(foreign_key="coordenador.id")
     texto: str
-    criada_em: datetime = Field(default_factory=datetime.now(timezone.utc))
+    criada_em: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
 
     duvida: Duvida = Relationship(back_populates="respostas")
     coordenador: Coordenador = Relationship(back_populates="respostas")
@@ -70,5 +73,7 @@ def create_db_and_tables():
 def get_session():
     with Session(engine) as session:
         yield session
+
+ALUNO_FANTASMA = {"id": 999, "password": "123"}
 
 Sessiondep = Annotated[Session, Depends(get_session)]

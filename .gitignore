@@ -1,1 +1,4 @@
-*.bd
+.venv/
+__pycache__/
+*.db
+.env

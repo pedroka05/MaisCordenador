@@ -4,6 +4,8 @@ version = "0.1.0"
 requires-python = ">=3.14"
 dependencies = [
     "fastapi[standard]>=0.141.1",
+    "itsdangerous>=2.2.0",
+    "python-dotenv>=1.2.3",
     "python-multipart>=0.0.32",
     "sqlmodel>=0.0.47",
 ]

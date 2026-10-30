@@ -20,11 +20,6 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 async def on_startup():
     db.create_db_and_tables()
 
-# Sessão
-async def token_session_verify(request: Request):
-    token = request.cookies.get("")
-
-
 
 
 # Pagina Inicial
@@ -57,6 +52,9 @@ def painel_aluno(request:Request):
 @app.post("")
 def logout(request: Request):
     return
+
+
+
 
 ### COORDENADOR
 

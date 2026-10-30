@@ -57,7 +57,7 @@
         <div class="row justify-content-center g-4">
             <!-- ALUNO -->
             <div class="col-12 col-md-4">
-                <a href="{{ url_for('student_login') }}" class="card cartao-escolha h-100 p-4">
+                <a href="{{ url_for('principal_login') }}" class="card cartao-escolha h-100 p-4">
                     <div class="card-body">
                         <i class="bi bi-person-badge icone-grande text-primary"></i>
                         <h4 class="card-title mt-3 fw-bold">Sou Aluno</h4>
@@ -68,7 +68,7 @@
 
             <!-- COORDENADOR -->
             <div class="col-12 col-md-4">
-                <a href="login_coord.html" class="card cartao-escolha h-100 p-4">
+                <a href="{{ url_for('student_login') }}" class="card cartao-escolha h-100 p-4">
                     <div class="card-body">
                         <i class="bi bi-briefcase icone-grande text-success"></i>
                         <h4 class="card-title mt-3 fw-bold">Sou Coordenador</h4>

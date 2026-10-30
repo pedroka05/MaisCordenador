@@ -7,8 +7,6 @@ from starlette.middleware.sessions import SessionMiddleware
 
 from typing import Annotated
 
-
-
 import database as db
 
 app = FastAPI()

@@ -46,17 +46,13 @@ async def student_login_form(request: Request, session: db.Sessiondep, id: Annot
 def painel_aluno(request:Request):
     return templates.TemplateResponse(request, "painel_aluno.html")
 
-@app.post("")
-def logout(request: Request):
-    return
-
 
 
 
 ### COORDENADOR
 
-@app.get('/login_coord/', name="principal_login")
-async def coord_login(request: Request, id: Annotated[int, Form(alias="id")], password: Annotated[str, Form(alias="password")]):
+@app.get('/login_coord/', name="principal_login", include_in_schema= False)
+async def coord_login(request: Request):
     return templates.TemplateResponse(request,"login_coord.html")
 
 @app.post('/login_coord/')

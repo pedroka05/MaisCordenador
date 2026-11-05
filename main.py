@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request,responses,Form, HTTPException, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.security import OAuth2PasswordRequestForm
-
+from sqlmodel import select
 from starlette.middleware.sessions import SessionMiddleware
 
 from typing import Annotated
@@ -46,9 +46,10 @@ async def student_login_form(request: Request, session: db.Sessiondep, id: Annot
 def painel_aluno(request:Request):
     return templates.TemplateResponse(request, "painel_aluno.html")
 
-@app.get("/{aluno_id}/painel_aluno/duvidas") # Tentando Ver como se resolve isso 
-def Duvidas(request:Request):
-    return
+@app.get("/{aluno_id}/painel_aluno/duvidas") # Isso em teoria vai funcionar Também
+async def Duvidas(request:Request, session: db.Sessiondep):
+    listDuvidas = session.exec(select(db.Duvida, db.Duvida.title, db.Duvida.date, db.Duvida.status)).all()
+    return templates.TemplateResponse(request,"duvidas aluno")
 
 @app.post("/{aluno_id}/painel_aluno/duvidas") ## Na teoria isso funciona, tem que ver na pratica dps
 async def Create_Duvida(aluno_id: int,session: db.Sessiondep, title:Annotated[str, Form(alias="title")], body: Annotated[str, Form(alias="bodytext")]):

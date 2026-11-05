@@ -50,8 +50,16 @@ def painel_aluno(request:Request):
 def Duvidas(request:Request):
     return
 
+@app.post("/{aluno_id}/painel_aluno/duvidas") ## Na teoria isso funciona, tem que ver na pratica dps
+async def Create_Duvida(aluno_id: int,session: db.Sessiondep, title:Annotated[str, Form(alias="title")], body: Annotated[str, Form(alias="bodytext")]):
 
+    duvida = db.Duvida(student_id=aluno_id, title= title, text= body)
 
+    session.add(duvida)
+    session.commit
+    session.refresh(duvida)
+
+    return duvida
 
 ### COORDENADOR
 

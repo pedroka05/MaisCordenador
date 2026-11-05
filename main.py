@@ -46,6 +46,10 @@ async def student_login_form(request: Request, session: db.Sessiondep, id: Annot
 def painel_aluno(request:Request):
     return templates.TemplateResponse(request, "painel_aluno.html")
 
+@app.get("/{aluno_id}/painel_aluno/duvidas") # Tentando Ver como se resolve isso 
+def Duvidas(request:Request):
+    return
+
 
 
 

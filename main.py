@@ -33,12 +33,12 @@ async def student_login(request: Request):
 
 @app.post('/login_aluno/', name='form_login_aluno') ## This could not be the best way to make a authentication but i will use it as a "quebra galho"
 async def student_login_form(request: Request, session: db.Sessiondep, id: Annotated[int, Form(alias="id")], password: Annotated[str, Form(alias="password")]):
-    
+
     aluno = session.get(db.Aluno, id)
 
     if aluno is None or aluno.password != password:
         raise HTTPException(status_code=401, detail="ID ou senha incorretos")
-    
+
     return responses.RedirectResponse(url=f"/{aluno.id}/painel_aluno", status_code= 303,)
 
 
@@ -72,12 +72,12 @@ async def coord_login(request: Request):
 async def coord_login_form(request: Request, session: db.Sessiondep, id: Annotated[int, Form(alias="id")], password: Annotated[str, Form(alias="password")]):
 
     coord = session.get(db.Coordenador, id)
-    
+
     if coord is None or coord.password != password:
         raise HTTPException(status_code=401, detail="ID ou senha incorretos")
-        
+
     return responses.RedirectResponse(url=f"/{coord.id}/painel_aluno", status_code= 303,)
-    
+
 
 @app.get('/{coord_id}/painel_coord')
 async def coord(request: Request):

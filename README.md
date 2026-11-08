@@ -18,3 +18,6 @@ uv sync
 
 #### Importante 
 Use o [Uv](https://docs.astral.sh/uv/)
+
+# Pelo amor de Deus...
+Olhe a documentação do [fastapi](https://fastapi.tiangolo.com/) e do [Jinja](https://jinja.palletsprojects.com/en/stable/)(Para mexer no frontend) 

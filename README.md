@@ -9,12 +9,11 @@ Frameworks
 
 Como contribuir ao projeto:
 
-De **git clone** no projeto e na pasta de projeto faça o seguinte
+De **git clone** no projeto e na pasta de projeto faça o seguinte, no diretório do projeto
 
 ```bash
 uv sync
 ```
-
 
 #### Importante 
 Use o [Uv](https://docs.astral.sh/uv/)

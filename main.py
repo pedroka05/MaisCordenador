@@ -69,16 +69,16 @@ async def coord_login(request: Request):
     return templates.TemplateResponse(request,"login_coord.html")
 
 @app.post('/login_coord/')
-async def coord_login_form(request: Request, session: db.Sessiondep, id: Annotated[int, Form(alias="id")], password: Annotated[str, Form(alias="password")]):
+async def coord_login_form( session: db.Sessiondep, id: Annotated[int, Form(alias="id")], password: Annotated[str, Form(alias="password")]):
 
     coord = session.get(db.Coordenador, id)
 
-    if coord is None or coord.password != password:
+    if coord is None or coord.senha != password:
         raise HTTPException(status_code=401, detail="ID ou senha incorretos")
 
-    return responses.RedirectResponse(url=f"/{coord.id}/painel_aluno", status_code= 303,)
+    return responses.RedirectResponse(url=f"/{coord.id}/painel_coord", status_code= 303,)
 
 
-@app.get('/{coord_id}/painel_coord')
-async def coord(request: Request):
+@app.get('/{coord_id}/painel_coord', include_in_schema=False, name="painel_coord")
+async def coord(request: Request): 
     return templates.TemplateResponse(request, "painel_coord.html")

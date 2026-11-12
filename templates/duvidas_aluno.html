@@ -41,6 +41,17 @@
                     </button>
                 </div>
                 
+                <div class="list-group">
+                     {% for duvida in duvidas %}
+                         <div>
+                             <h5>{{ duvida.title }}</h5>
+                             <p class="text-muted">{{ duvida.text }}</p>
+                         </div>
+                     {% else %}
+                     <p>No questions found.</p>
+                     {% endfor %}
+                </div>
+                
                 <div class="accordion card overflow-hidden p-0" id="accordionDuvidas">
                     <div class="accordion-item border-0 border-bottom">
                         <h2 class="accordion-header">

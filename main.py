@@ -43,13 +43,17 @@ async def student_login_form(request: Request, session: db.Sessiondep, id: Annot
 
 
 @app.get("/{aluno_id}/painel_aluno", name="painel_aluno", include_in_schema=False)
-def painel_aluno(request:Request):
-    return templates.TemplateResponse(request, "painel_aluno.html")
+def painel_aluno(request:Request, aluno_id: int):
+    return templates.TemplateResponse(request, "painel_aluno.html", {"aluno_id": aluno_id})
 
-@app.get("/{aluno_id}/painel_aluno/duvidas") # Isso em teoria vai funcionar Também
+@app.get("/{aluno_id}/painel_aluno/duvidas", name = "duvidas_aluno", include_in_schema=False) # Isso em teoria vai funcionar Também
 async def Duvidas(request:Request, session: db.Sessiondep):
-    listDuvidas = session.exec(select(db.Duvida, db.Duvida.title, db.Duvida.date, db.Duvida.status)).all()
-    return templates.TemplateResponse(request,"duvidas aluno")
+    return templates.TemplateResponse(request,"duvidas_aluno.html")
+
+@app.get("/{aluno_id}/painel_aluno/duvidas")
+async def List_Duvidas(aluno_id: int, session: db.Sessiondep):
+    duvidas = session.exec(select(db.Duvida).where(db.Duvida.student_id == aluno_id)).all()
+    return templates.TemplateResponse("duvidas_aluno.html", {"request": Request, "duvidas": duvidas})
 
 @app.post("/{aluno_id}/painel_aluno/duvidas") ## Na teoria isso funciona, tem que ver na pratica dps
 async def Create_Duvida(aluno_id: int,session: db.Sessiondep, title:Annotated[str, Form(alias="title")], body: Annotated[str, Form(alias="bodytext")]):

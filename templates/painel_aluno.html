@@ -22,7 +22,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-4 gap-2">
                     <li class="nav-item"><a class="nav-link active" href="painel_aluno.html"><i class="bi bi-newspaper me-1"></i> Mural</a></li>
                     <li class="nav-item"><a class="nav-link" href="cronograma_aluno.html"><i class="bi bi-calendar3 me-1"></i> Cronograma</a></li>
-                    <li class="nav-item"><a class="nav-link" href="duvidas_aluno.html"><i class="bi bi-question-circle me-1"></i> FAQ / Dúvidas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('duvidas_aluno', aluno_id=aluno_id) }}"><i class="bi bi-question-circle me-1"></i>Dúvidas</a></li>
                 </ul>
                 <a href="index.html" class="btn btn-outline-danger btn-sm px-3"><i class="bi bi-box-arrow-right me-1"></i> Sair</a>
             </div>

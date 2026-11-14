@@ -50,10 +50,6 @@ def painel_aluno(request:Request, aluno_id: int):
 
 
 ### DÚVIDAS
-@app.get("/{aluno_id}/painel_aluno/duvidas", name = "duvidas_aluno", include_in_schema=False) # Isso em teoria vai funcionar Também
-async def Duvidas(request:Request, session: db.Sessiondep):
-    return templates.TemplateResponse(request,"duvidas_aluno.html")
-
 @app.get("/{aluno_id}/painel_aluno/duvidas", name="duvidas_aluno")
 async def List_Duvidas(aluno_id: int, request: Request, session: db.Sessiondep):
     duvidas = session.exec(
@@ -66,16 +62,19 @@ async def List_Duvidas(aluno_id: int, request: Request, session: db.Sessiondep):
         {"aluno_id": aluno_id, "duvidas": duvidas},
     )
 
-@app.post("/{aluno_id}/painel_aluno/duvidas") ## Na teoria isso funciona, tem que ver na pratica dps
-async def Create_Duvida(aluno_id: int,session: db.Sessiondep, title:Annotated[str, Form(alias="title")], body: Annotated[str, Form(alias="bodytext")]):
+@app.post("/{aluno_id}/painel_aluno/duvidas", name="create_duvida") ## Na teoria isso funciona, tem que ver na pratica dps
+async def Create_Duvida(aluno_id: int, request: Request, session: db.Sessiondep, title:Annotated[str, Form(alias="title")], body: Annotated[str, Form(alias="bodytext")]):
 
     duvida = db.Duvida(student_id=aluno_id, title= title, text= body)
 
     session.add(duvida)
-    session.commit
+    session.commit()
     session.refresh(duvida)
 
-    return duvida
+    return responses.RedirectResponse(
+        url=f"/{aluno_id}/painel_aluno/duvidas",
+        status_code=303,
+    )
 
 
 

@@ -6,7 +6,7 @@
     <title>Painel da Coordenação - Avisos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="estilo.css" rel="stylesheet">
+    <link href="{{ url_for('static', path = 'css/estilo.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="dashboard-wrapper">
@@ -14,8 +14,8 @@
         <div class="sidebar">
             <div class="brand"><i class="bi bi-layers-fill text-success fs-4"></i> Portal Coordenador</div>
             <nav class="nav flex-column mb-auto">
-                <a href="painel_coord.html" class="nav-link-sidebar active"><i class="bi bi-megaphone"></i> Gerenciar Avisos</a>
-                <a href="duvidas_coord.html" class="nav-link-sidebar"><i class="bi bi-chat-left-dots"></i> Dúvidas</a>
+                <a href="{{ url_for('painel_coord', coord_id=coord_id) }}" class="nav-link-sidebar active"><i class="bi bi-megaphone"></i> Gerenciar Avisos</a>
+                <a href="{{ url_for('duvidas_coord', coord_id=coord_id) }}" class="nav-link-sidebar"><i class="bi bi-chat-left-dots"></i> Dúvidas</a>
                 <a href="cronograma_coord.html" class="nav-link-sidebar"><i class="bi bi-calendar-event"></i> Cronograma</a>
             </nav>
             <a href="index.html" class="nav-link-sidebar mt-auto text-danger"><i class="bi bi-box-arrow-left"></i> Sair</a>

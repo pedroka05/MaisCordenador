@@ -1,12 +1,9 @@
 from fastapi import FastAPI, Request,responses,Form, HTTPException, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from fastapi.security import OAuth2PasswordRequestForm
 from sqlmodel import select
-from starlette.middleware.sessions import SessionMiddleware
 
 from typing import Annotated
-from pathlib import Path
 
 import database as db
 
@@ -77,8 +74,6 @@ async def Create_Duvida(aluno_id: int, request: Request, session: db.Sessiondep,
     )
 
 
-
-
 # COORDENADOR
 
 @app.get('/login_coord/', name="principal_login", include_in_schema= False)
@@ -95,8 +90,24 @@ async def coord_login_form( session: db.Sessiondep, id: Annotated[int, Form(alia
 
     return responses.RedirectResponse(url=f"/{coord.id}/painel_coord", status_code= 303,)
 
-
 ### Painel do Coordenador
 @app.get('/{coord_id}/painel_coord', include_in_schema=False, name="painel_coord")
-async def coord(request: Request): 
-    return templates.TemplateResponse(request, "painel_coord.html")
+async def coord(request: Request, coord_id: int):
+    return templates.TemplateResponse(
+        request,
+        "painel_coord.html",
+        {"coord_id": coord_id},
+    )
+
+### Chamadas do Coordenador
+@app.get("/{coord_id}/painel_coord/duvidas", name="duvidas_coord")
+async def List_Duvidas_Coord(coord_id: int, request: Request, session: db.Sessiondep):
+    duvidas = session.exec(
+        select(db.Duvida).where(db.Duvida.status == "aberta")
+    ).all()
+
+    return templates.TemplateResponse(
+        request,
+        "duvidas_coord.html",
+        {"coord_id": coord_id, "duvidas": duvidas},
+    )

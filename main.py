@@ -42,8 +42,16 @@ async def student_login_form(request: Request, session: db.Sessiondep, id: Annot
 
 ### Painel do Aluno
 @app.get("/{aluno_id}/painel_aluno", name="painel_aluno", include_in_schema=False)
-def painel_aluno(request:Request, aluno_id: int):
-    return templates.TemplateResponse(request, "painel_aluno.html", {"aluno_id": aluno_id})
+def painel_aluno(request: Request, aluno_id: int, session: db.Sessiondep):
+    aluno = session.get(db.Aluno, aluno_id)
+    if aluno is None:
+        raise HTTPException(status_code=404, detail="Aluno não encontrado")
+
+    return templates.TemplateResponse(
+        request,
+        "painel_aluno.html",
+        {"aluno_id": aluno_id, "aluno": aluno},
+    )
 
 
 ### DÚVIDAS
